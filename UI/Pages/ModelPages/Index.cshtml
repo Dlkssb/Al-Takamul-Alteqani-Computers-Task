@@ -1,0 +1,87 @@
+﻿@page
+@using Newtonsoft.Json;
+@model UI.Pages.ModelPages.IndexModel
+@{
+    <h1>Books</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <label>Main Category:</label>
+            <select id="mainCategory" class="form-control" asp-for="SelectedMainCategory" asp-items="Model.MainCategoryOptions"></select>
+        </div>
+        <div class="col-md-6">
+            <label>Subcategory:</label>
+            <select id="subcategory" class="form-control" asp-for="SelectedSubcategory" asp-items="Model.SubcategoryOptions"></select>
+        </div>
+    </div>
+
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>Subcategory</th>
+            </tr>
+        </thead>
+        <tbody id="bookTableBody">
+            @foreach (var book in Model.FilteredBooks)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.Category</td>
+                    <td>@book.Subcategory</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @section Scripts {
+        <script>
+            var booksData = @Html.Raw(Json.Serialize(Model.Books));
+            console.log(booksData);
+
+            $(document).ready(function () {
+                $('#mainCategory').on('change', filterBooks);
+                $('#subcategory').on('change', filterBooks);
+
+                function filterBooks() {
+                    var mainCategory = $('#mainCategory').val();
+                    var subcategory = $('#subcategory').val();
+                    var filteredBooks = booksData;
+
+                    if (mainCategory !== '') {
+                        filteredBooks = filteredBooks.filter(function (book) {
+                            return book.category === mainCategory;
+                        });
+                    }
+
+                    if (subcategory !== '') {
+                        filteredBooks = filteredBooks.filter(function (book) {
+                            return book.subcategory === subcategory;
+                        });
+                    }
+
+                    renderFilteredBooks(filteredBooks);
+                }
+
+                function renderFilteredBooks(books) {
+                    var tableBody = $('#bookTableBody');
+                    tableBody.empty();
+
+                    $.each(books, function (index, book) {
+                        var row = '<tr>' +
+                            '<td>' + book.title + '</td>' +
+                            '<td>' + book.author + '</td>' +
+                            '<td>' + book.category + '</td>' +
+                            '<td>' + book.subcategory + '</td>' +
+                            '</tr>';
+
+                        tableBody.append(row);
+                    });
+                }
+            });
+        </script>
+    }
+ }

@@ -1,0 +1,71 @@
+body {
+    background-color: #f6f6f6;
+  }
+
+  .container-fluid {
+    max-width:max-content;
+  }
+
+  h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .card {
+    border-radius: 0;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 5px solid #dee2e6;
+  }
+
+  .card-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .card-body {
+    background-color: #fff;
+    color: #333;
+  }
+
+  .card-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+  }
+
+  .table {
+    background-color: #fff;
+    color: #333;
+  }
+
+  .table th {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: bold;
+    border-top: none;
+  }
+
+  .table-hover tbody tr:hover {
+    background-color: #f6f6f6;
+  }
+
+  .question-link {
+    color: #0077cc;
+    text-decoration: none;
+  }
+
+  .question-link:hover {
+    text-decoration: underline;
+  }
+
+  .no-questions {
+    font-style: italic;
+    text-align: center;
+    color: #999;
+  }
